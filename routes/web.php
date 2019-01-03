@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('blog.index');
     // dd(app('Illuminate\Contracts\Config\Repository'));
     // dd(Config::get('database.default', 'default'));
     // dd(app('Illuminate\Config\Repository')['database']['default']);
