@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top py-3">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -38,6 +38,16 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('blog') }}">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('blog') }}">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('blog') }}">Contact Us</a>
+                        </li>
+                        
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
