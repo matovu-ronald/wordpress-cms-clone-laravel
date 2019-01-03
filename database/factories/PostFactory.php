@@ -2,8 +2,6 @@
 
 use Carbon\Carbon;
 use Faker\Generator as Faker;
-use Faker\Provider\tr_TR\DateTime;
-
 
 
 $factory->define(App\Post::class, function( Faker $faker ) {
@@ -11,6 +9,13 @@ $factory->define(App\Post::class, function( Faker $faker ) {
         'author_id' => function () {
             if (rand(1, 10) % 5 == 0) {
                 return factory(App\User::class)->create()->id;
+            } else {
+                return rand(1, 5);
+            }
+        },
+        'category_id' => function () {
+            if (rand(1, 5) % 5 == 0) {
+                return factory(App\Category::class)->create()->id;
             } else {
                 return rand(1, 5);
             }
