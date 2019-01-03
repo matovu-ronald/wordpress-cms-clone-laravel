@@ -1,0 +1,32 @@
+.post-item {
+    box-shadow: 0 2px 2px #efefef;
+    .post-item-body {
+    }
+
+    .post-item-title {
+
+    }
+
+    .post-item-content {
+
+    }
+
+    .post-item-underline {
+        display: block;
+        height: 2px;
+        background-color: #efefef;
+        width: 100%;
+        content: " ";
+        // margin-top: 2px;
+    }
+
+    .post-item-meta {
+        
+        ul {
+            list-style: none;
+        }
+        li {
+            padding-right: 10px;
+        }
+    }
+}
