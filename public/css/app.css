@@ -3053,6 +3053,11 @@
   clip: auto;
 }
 
+body {
+  background-color: #FDFFFC;
+  padding-top: 70px;
+}
+
 .post-item {
   box-shadow: 0 2px 2px #efefef;
 }

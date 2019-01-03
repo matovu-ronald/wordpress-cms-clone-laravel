@@ -2,14 +2,20 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+
+
 // Font Awesome
 @import 'node_modules/font-awesome/scss/font-awesome.scss';
 
-// blog Scss
-@import 'blog';
  
 // Variables
 @import 'variables';
+
+//Main Styles
+@import 'main';
+
+// blog Scss
+@import 'blog';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
