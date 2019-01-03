@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -17,10 +18,11 @@ class PostController extends Controller
     {
         // $posts = Post::with('author')->latestFirst()->paginate(5); generates about more 5 queries
         $posts = Post::with('author')
+                    ->with('category')
                     ->latest()
                     ->published()
                     ->simplePaginate($this->limit);
-        return view('blog.index', compact('posts'));
+        return view('blog.index', compact(['posts']));
     }
 
     /**

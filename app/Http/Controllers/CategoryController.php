@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    protected $limit = 5;
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +48,20 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $categoryName = $category->title;
+
+        $posts = $category->posts()
+            ->with('category')
+            ->with('author')
+            ->latest()
+            ->published()
+            ->simplePaginate($this->limit);
+        // $posts = Post::with('author')
+        //     ->latest()
+        //     ->published()
+        //     ->where('category_id', $category->id)
+        //     ->simplePaginate($this->limit);
+        return view('blog.index', compact(['posts', 'categoryName']));
     }
 
     /**

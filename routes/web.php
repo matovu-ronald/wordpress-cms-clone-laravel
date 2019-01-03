@@ -13,6 +13,7 @@
 
 Route::get('/', 'PostController@index')->name('blog');
 Route::get('/blog/{post}', 'PostController@show')->name('blog.show');
+Route::get('/category/{category}', 'CategoryController@show')->name('category.show');
 
 Route::get('test', 'WelcomeController@test');
 Route::get('reports', 'ReportsController@index');
