@@ -8,14 +8,14 @@
                     <article class="post-item mb-5 shadow-sm">
                         @if ($post->imageUrl)
                             <div class="post-item-image">
-                                <a href="#">
+                                <a href="{{ route('blog.show', $post->id) }}">
                                     <img src="{{ $post->imageUrl }}" class="img-fluid" alt="{{ $post->title }}">
                                 </a>
                             </div>
                         @endif
                         <div class="post-item-body">
                             <div class="post-item-title px-4 py-2">
-                                <h2>{{ $post->title }}</h2>
+                                <h2><a href="{{ route('blog.show', $post->id) }}">{{ $post->title }}</a></h2>
                             </div>
                             <div class="post-item-content px-4 py-2">
                                 {!! $post->excerpt !!}
@@ -31,7 +31,7 @@
                                     </ul>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#">Continue Reading &raquo;</a>
+                                    <a href="{{ route('blog.show', $post->id) }}">Continue Reading &raquo;</a>
                                 </div>
                             </div>
                         </div>

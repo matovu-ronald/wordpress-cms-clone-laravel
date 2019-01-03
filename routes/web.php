@@ -12,10 +12,7 @@
 */
 
 Route::get('/', 'PostController@index')->name('blog');
-
-Route::get('/blog/show', function () {
-    return view('blog.show');
-});
+Route::get('/blog/{post}', 'PostController@show')->name('blog.show');
 
 Route::get('test', 'WelcomeController@test');
 Route::get('reports', 'ReportsController@index');
