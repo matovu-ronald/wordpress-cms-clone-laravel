@@ -15,7 +15,7 @@
                             <h2>{{ $post->title }}</h2>
                         </div>
                         <div class="post-item-content py-2 px-4">
-                            {!! $post->body !!}
+                            {!! $post->bodyHtml !!}
                         </div>
                         <div class="post-item-underline my-3"></div>
                         <div class="post-item-meta d-flex">
@@ -27,12 +27,13 @@
                                     <li><i class="fa fa-comments"></i> <a href="#">4 Comments</a></li>
                                 </ul>
                             </div>
-                            <div class="pull-right">
-                                <a href="{{ route('blog.show', $post->id) }}">Continue Reading &raquo;</a>
-                            </div>
+                        
                         </div>
                     </div>
                 </article>
+            </div>
+            <div class="col-md-4">
+                @include('blog.sidebar')
             </div>
         </div>
     </div>

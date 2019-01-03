@@ -18,7 +18,7 @@
                                 <h2><a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a></h2>
                             </div>
                             <div class="post-item-content px-4 py-2">
-                                {!! $post->excerpt !!}
+                                {!! $post->excerptHtml !!}
                             </div>
                             <div class="post-item-underline my-3"></div>
                             <div class="post-item-meta d-flex">
@@ -31,7 +31,7 @@
                                     </ul>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ route('blog.show', $post->id) }}">Continue Reading &raquo;</a>
+                                    <a href="{{ route('blog.show', $post->slug) }}">Continue Reading &raquo;</a>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                 
             </div>
             <div class="col-md-4">
-
+                @include('blog.sidebar')
             </div>
         </div>
     </div>
