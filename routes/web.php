@@ -23,3 +23,7 @@ Route::get('/', function () {
 
 Route::get('test', 'WelcomeController@test');
 Route::get('reports', 'ReportsController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
