@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 use Faker\Provider\tr_TR\DateTime;
 
@@ -21,7 +22,8 @@ $factory->define(App\Post::class, function( Faker $faker ) {
         'image' => function () {
             return rand(0, 1) == 1 ? ('Post_Image_' . rand(1, 5) . '.jpg') : NULL;
         },
-        'created_at' => $faker->date(),
-        'updated_at' => $faker->date()
+        'created_at' => Carbon::now()->subDays(rand(1, 60)),
+        'updated_at' => Carbon::now()->subDays(rand(1, 60)),
+        'published_at' => rand(0, 1) == 1 ?  Carbon::now()->subDays(rand(1, 60)) : NULL
     ];
 });

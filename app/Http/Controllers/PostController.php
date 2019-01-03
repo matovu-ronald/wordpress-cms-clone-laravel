@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    protected $limit = 5;
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::with('author')->latestFirst()->paginate(5); generates about more 5 queries
+        $posts = Post::with('author')
+                    ->latest()
+                    ->published()
+                    ->simplePaginate($this->limit);
         return view('blog.index', compact('posts'));
     }
 

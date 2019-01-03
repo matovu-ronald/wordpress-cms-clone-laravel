@@ -13,30 +13,33 @@
                                 </a>
                             </div>
                         @endif
-                        <div class="post-item-body p-4">
-                            <div class="post-item-title py-2">
+                        <div class="post-item-body">
+                            <div class="post-item-title px-4 py-2">
                                 <h2>{{ $post->title }}</h2>
                             </div>
-                            <div class="post-item-content">
+                            <div class="post-item-content px-4 py-2">
                                 {!! $post->excerpt !!}
                             </div>
                             <div class="post-item-underline my-3"></div>
-                            <div class="post-item-meta d-flex justify-content-between">
-                                <div class="">
+                            <div class="post-item-meta d-flex">
+                                <div class="pull-left">
                                     <ul class="d-flex justify-content-between">
-                                        <li><i class="fa fa-user"></i> <a href="#">Admin</a></li>
-                                        <li><i class="fa fa-clock-o"></i> <a href="#">February 12, 2016</a></li>
+                                        <li><i class="fa fa-user"></i> <a href="#">{{ $post->author->name }}</a></li>
+                                        <li><i class="fa fa-clock-o"></i> <a href="#">{{ $post->date }}</a></li>
                                         <li><i class="fa fa-tags"></i> <a href="#">Blog</a></li>
                                         <li><i class="fa fa-comments"></i> <a href="#">4 Comments</a></li>
                                     </ul>
                                 </div>
-                                <div class="">
+                                <div class="pull-right">
                                     <a href="#">Continue Reading &raquo;</a>
                                 </div>
                             </div>
                         </div>
                     </article>
                 @endforeach
+                <nav>
+                    {{ $posts->links() }}
+                </nav>
                 
             </div>
             <div class="col-md-4">
