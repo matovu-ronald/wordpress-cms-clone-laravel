@@ -30,4 +30,13 @@
             padding-right: 10px;
         }
     }
+
+    .widget {
+        .widget-body {
+            ul {
+                list-style-type: none;
+            }
+        }
+    }
+    
 }

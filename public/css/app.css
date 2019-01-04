@@ -3078,6 +3078,10 @@ body {
   padding-right: 10px;
 }
 
+.post-item .widget .widget-body ul {
+  list-style-type: none;
+}
+
 /*!
  * Bootstrap v4.2.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
