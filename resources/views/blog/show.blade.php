@@ -23,7 +23,7 @@
                                 <ul class="d-flex justify-content-between">
                                     <li><i class="fa fa-user"></i> <a href="{{ route('author', $post->author->slug) }}">{{ $post->author->name }}</a></li>
                                     <li><i class="fa fa-clock-o"></i> <a href="#">{{ $post->date }}</a></li>
-                                    <li><i class="fa fa-tags"></i> <a href="{{ route('category.show', $post->category->slug) }}">{{ $post->category->title }}</a></li>
+                                    <li><i class="fa fa-folder"></i> <a href="{{ route('category.show', $post->category->slug) }}">{{ $post->category->title }}</a></li>
                                     <li><i class="fa fa-comments"></i> <a href="#">4 Comments</a></li>
                                 </ul>
                             </div>
@@ -35,7 +35,7 @@
                     <div class="post-author-media d-flex flex-row p-4">
                         <div class="justify-content-start pr-3">
                             <a href="{{ route('author', $post->author->slug ) }}">
-                                <img class="img-fluid rounded-circle" src="/img/author.jpg" alt="{{ $post->author->name }}">
+                                <img class="img-fluid rounded-circle" src="{{ $post->author->gravatar() }}" alt="{{ $post->author->name }}">
                             </a>
                         </div>
                         <div class="post-author-media-body justify-content-end">

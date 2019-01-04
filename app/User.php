@@ -39,6 +39,17 @@ class User extends Authenticatable
         return 'slug';
     }
 
+    public function gravatar()
+    {
+        $email = $this->email;
+        $default = "https://www.gravatar.com/avatar/";
+        $size = 100;
+
+        $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+        
+        return $grav_url;
+    }
+
     public function getBioHtmlAttribute($value)
     {
         return $this->bio ? Markdown::convertToHtml(e($this->bio)) : NULL;
