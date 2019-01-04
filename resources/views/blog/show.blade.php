@@ -45,12 +45,11 @@
                             <div class="post-author-media-count">
                                 <a href="#">
                                     <i class="fa fa-clone"></i>
-                                    {{ $post->author->posts->count() }} {{ str_plural('Post', $post->author->posts->count()) }}
+                                    {{ $post->author->posts()->published()->count() }} {{ str_plural('Post', $post->author->posts()->published()->count()) }}
                                 </a>
                             </div>
                             <p>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis modi architecto ex ea autem, excepturi delectus ratione fugit voluptas quas.
-
+                                {!! $post->author->bio_html !!}
                             </p>
                         </div>
                     </div>
