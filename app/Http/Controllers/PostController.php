@@ -55,6 +55,13 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        // 1.  update the view_count field in the database
+        // $viewCount = $post->view_count + 1;
+        // $post->update(['view_count' => $viewCount]);
+
+        // 2. Using increment method
+        $post->increment('view_count');
+
         return view('blog.show', compact('post'));
     }
 

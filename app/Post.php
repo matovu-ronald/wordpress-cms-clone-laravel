@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    protected $fillable = ['view_count'];
     protected $dates = ['published_at'];
 
     public function author()
