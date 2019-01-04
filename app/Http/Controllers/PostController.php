@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 use App\Category;
 
@@ -89,5 +90,18 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function author(User $author)
+    {
+        $authorName = $author->name;
+
+        $posts = $author->posts()
+            ->with('category')
+            ->latest()
+            ->published()
+            ->simplePaginate($this->limit);
+
+        return view('blog.index', compact('posts', 'authorName'));
     }
 }

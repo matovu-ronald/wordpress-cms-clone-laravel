@@ -21,13 +21,37 @@
                         <div class="post-item-meta d-flex">
                             <div class="pull-left">
                                 <ul class="d-flex justify-content-between">
-                                    <li><i class="fa fa-user"></i> <a href="#">{{ $post->author->name }}</a></li>
+                                    <li><i class="fa fa-user"></i> <a href="{{ route('author', $post->author->slug) }}">{{ $post->author->name }}</a></li>
                                     <li><i class="fa fa-clock-o"></i> <a href="#">{{ $post->date }}</a></li>
-                                    <li><i class="fa fa-tags"></i> <a href="#">Blog</a></li>
+                                    <li><i class="fa fa-tags"></i> <a href="{{ route('category.show', $post->category->slug) }}">{{ $post->category->title }}</a></li>
                                     <li><i class="fa fa-comments"></i> <a href="#">4 Comments</a></li>
                                 </ul>
                             </div>
                         
+                        </div>
+                    </div>
+                </article>
+                <article class="post-author shadow-sm my-5">
+                    <div class="post-author-media d-flex flex-row p-4">
+                        <div class="justify-content-start pr-3">
+                            <a href="{{ route('author', $post->author->slug ) }}">
+                                <img class="img-fluid rounded-circle" src="/img/author.jpg" alt="{{ $post->author->name }}">
+                            </a>
+                        </div>
+                        <div class="post-author-media-body justify-content-end">
+                            <h4 class="post-author-media-title">
+                                <a href="{{ route('author', $post->author->slug ) }}">{{ $post->author->name }}</a>
+                            </h4>
+                            <div class="post-author-media-count">
+                                <a href="#">
+                                    <i class="fa fa-clone"></i>
+                                    {{ $post->author->posts->count() }} {{ str_plural('Post', $post->author->posts->count()) }}
+                                </a>
+                            </div>
+                            <p>
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis modi architecto ex ea autem, excepturi delectus ratione fugit voluptas quas.
+
+                            </p>
                         </div>
                     </div>
                 </article>

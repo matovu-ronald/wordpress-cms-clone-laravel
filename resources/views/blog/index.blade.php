@@ -14,6 +14,11 @@
                             <p>Category: <span class="font-weight-bolder">{{ $categoryName }}</span></p>
                         </div>
                     @endif
+                    @if (isset($authorName))
+                        <div class="alert alert-info">
+                            <p>Author: <span class="font-weight-bolder">{{ $authorName }}</span></p>
+                        </div>
+                    @endif
                     @foreach ($posts as $post)
                         <article class="post-item mb-5 shadow-sm">
                             @if ($post->imageUrl)
@@ -34,7 +39,7 @@
                                 <div class="post-item-meta d-flex">
                                     <div class="pull-left">
                                         <ul class="d-flex justify-content-between">
-                                            <li><i class="fa fa-user"></i> <a href="#">{{ $post->author->name }}</a></li>
+                                            <li><i class="fa fa-user"></i> <a href="{{ route('author', $post->author->slug) }}">{{ $post->author->name }}</a></li>
                                             <li><i class="fa fa-clock-o"></i> {{ $post->date }} </li>
                                             <li><i class="fa fa-tags"></i> <a href="{{ route('category.show', $post->category->slug ) }}">{{ $post->category->title }}</a></li>
                                             <li><i class="fa fa-comments"></i> <a href="#">4 Comments</a></li>
