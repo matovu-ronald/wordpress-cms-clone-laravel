@@ -1,13 +1,16 @@
 <aside class="right-sidebar">
     <div class="search-widget shadow-sm my-4 p-4">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search For ..." aria-label="search" aria-describedby="search">
-            <div class="input-group-append">
-                <i class="input-group-text fa fa-search" id="search"></i>
+            <input type="text" class="form-control rounded-0" placeholder="Search For ..." aria-label="search" aria-describedby="search">
+            <div class="input-group-append ">
+                <i class="input-group-text rounded-0 fa fa-search" id="search"></i>
             </div>
         </div>
     </div>
     <div class="widget shadow-sm my-4">
+        <div class="widget-heading p-3 border-bottom">
+            <h4>Categories</h4>
+        </div>
         <ul class="list-group list-group-flush">
             @foreach ($categories as $category)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
