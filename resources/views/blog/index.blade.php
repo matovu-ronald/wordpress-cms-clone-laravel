@@ -54,7 +54,7 @@
                     @endforeach
                 @endif
                 
-                <nav>
+                <nav class="">
                     {{ $posts->links() }}
                 </nav>
                 

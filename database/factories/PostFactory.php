@@ -29,6 +29,7 @@ $factory->define(App\Post::class, function( Faker $faker ) {
         },
         'created_at' => Carbon::now()->subDays(rand(1, 60)),
         'updated_at' => Carbon::now()->subDays(rand(1, 60)),
-        'published_at' => rand(0, 1) == 1 ?  Carbon::now()->subDays(rand(1, 60)) : NULL
+        'published_at' => rand(0, 1) == 1 ?  Carbon::now()->subDays(rand(1, 60)) : NULL,
+        'view_count' => $faker->randomDigit(rand(0, 100))
     ];
 });
