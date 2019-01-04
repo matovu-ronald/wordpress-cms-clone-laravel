@@ -18,8 +18,8 @@ class BlogComposer
     {
         $categories = Category::with(['posts' => function ($query) {
                     $query->published();
-        }])->orderBy('title', 'asc')->get();
-    
+        }])->orderBy('title', 'asc')->get(); 
+          
         $view->with('categories', $categories);
     }
 
