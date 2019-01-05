@@ -25,7 +25,7 @@
                     @foreach (Alert::all() as $alert)
                         <div class="alert alert-success">{{ $alert }}</div>
                     @endforeach
-                    <form action="{{ route('backend.blog.store') }}" method="post">
+                    <form action="{{ route('backend.blog.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                             <label for="title">Title</label>

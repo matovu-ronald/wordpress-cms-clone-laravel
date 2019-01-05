@@ -11,6 +11,15 @@ class PostController extends BackendController
 {
     protected $limit = 10;
 
+    protected $uploadPath;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->uploadPath =  public_path('img');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +50,8 @@ class PostController extends BackendController
      */
     public function store(PostRequest $request)
     {
-        $request->user()->posts()->create($request->all());
+        $data = $this->handleRequest($request);
+        $request->user()->posts()->create($data);
 
         Alert::success('Post created successfully')->flash();
 
@@ -91,5 +101,23 @@ class PostController extends BackendController
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function handleRequest($request)
+    {
+        $data = $request->all();
+
+        if ($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $fileName = $image->getClientOriginalName();
+            $destination = $this->uploadPath;
+
+            $image->move($destination, $fileName);
+
+            $data['image'] = $fileName;
+        }
+
+        return $data;
     }
 }
