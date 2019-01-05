@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use Alert;
+use Image;
 use App\Post;
 use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class PostController extends BackendController
     {
         parent::__construct();
 
-        $this->uploadPath =  public_path('img');
+        $this->uploadPath =  public_path(config('cms.image.directory'));
     }
 
     /**
@@ -109,11 +110,34 @@ class PostController extends BackendController
 
         if ($request->hasFile('image')) {
 
+            //Set Image variable with the image file from the request
             $image = $request->file('image');
+
+            //Get Name of the Uploaded file
             $fileName = $image->getClientOriginalName();
+             
+            //Set Destination Path  
             $destination = $this->uploadPath;
 
-            $image->move($destination, $fileName);
+            //Set successUploaded variable for the image 
+            $successUploaded = $image->move($destination, $fileName);
+
+            //Check if the image is succesfully uploaded before resizing
+            if ($successUploaded) {
+
+                //Get File Extension and generation thumbnail name
+                $extension = $image->getClientOriginalExtension();
+                $thumbnail = str_replace(".{$extension}", "_thumb.{$extension}", $fileName);
+
+                //Set Size for image using configuration values
+                $width = config('cms.image.thumbnail.width');
+                $height = config('cms.image.thumbnail.height');
+
+                //Resize image using intervention image package
+                Image::make($destination . '/' . $fileName)
+                    ->resize($width, $height)
+                    ->save($destination . '/' . $thumbnail);
+            }
 
             $data['image'] = $fileName;
         }
