@@ -9,7 +9,9 @@
         Blog <small>Display All Blog Posts</small>
     </h1>
     <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+        <li> <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="{{ route('backend.blog.index') }}">Blog</a></li>
+        <li class="active">All Posts</li>
     </ol>
 </section>
 
@@ -20,45 +22,51 @@
             <div class="box">
             <!-- /.box-header -->
                 <div class="box-body ">
-                   <div class="table-responsive">
-                       <table class="table table-hover table-bordered">
-                           <thead>
-                                <tr>
-                                    <th>Actions</th>
-                                    <th>Title</th>
-                                    <th>Category</th>
-                                    <th>Author</th>
-                                    <th>Date</th>
-                                </tr>
-                           </thead>
-                           <tbody>
-                                @foreach ($posts as $post)
-                                    <tr>
-                                        <td>
-                                            <a href="{{ route('backend.blog.edit', $post->id) }}" class="btn btn-xs btn-default">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a href="{{ route('backend.blog.destroy', $post->id) }}" class="btn btn-xs btn-danger">
-                                                <i class="fa fa-times"></i>
-                                            </a>
-                                        </td>
-                                        <td> {{ $post->title }} </td>
-                                        <td>{{ $post->category->title }}</td>
-                                        <td>{{ $post->author->name }}</td>
-                                        <td>
-                                           <abbr title="{{ $post->dateFormatted(true) }}" > {{ $post->dateFormatted() }} </abbr>
-                                           {!! $post->publicationLabel() !!}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                           </tbody>
-                        </table>
-                   </div>
-                   <div class="box-footer clearfix">
+                    @if (! $posts->count())
+                        <div class="alert alert-danger text-center">
+                            <strong>No records Found</strong>
+                        </div>
+                    @else 
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                        <tr>
+                                            <th>Actions</th>
+                                            <th>Title</th>
+                                            <th>Category</th>
+                                            <th>Author</th>
+                                            <th>Date</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        @foreach ($posts as $post)
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ route('backend.blog.edit', $post->id) }}" class="btn btn-xs btn-default">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a href="{{ route('backend.blog.destroy', $post->id) }}" class="btn btn-xs btn-danger">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
+                                                </td>
+                                                <td> {{ $post->title }} </td>
+                                                <td>{{ $post->category->title }}</td>
+                                                <td>{{ $post->author->name }}</td>
+                                                <td>
+                                                <abbr title="{{ $post->dateFormatted(true) }}" > {{ $post->dateFormatted() }} </abbr>
+                                                {!! $post->publicationLabel() !!}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                </tbody>
+                                </table>
+                        </div>
+                    @endif
+                    <div class="box-footer clearfix">
                         {{ $posts->links() }}
                     </div>
                     <div class="pull-right">
-                        <small>4 Items</small>
+                        <small>{{ $postCount }} {{ str_plural('Item', $postCount) }}</small>
                     </div>
                 </div>
                 <!-- /.box-body -->
@@ -69,4 +77,10 @@
 <!-- ./row -->
 </section>
 <!-- /.content -->
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        $('ul.pagination').addClass('no-margin pagination-sm');
+    </script>
 @endsection
