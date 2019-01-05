@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Alert;
 use App\Post;
+use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 
 class PostController extends BackendController
@@ -37,9 +39,13 @@ class PostController extends BackendController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        $request->user()->posts()->create($request->all());
+
+        Alert::success('Post created successfully')->flash();
+
+        return back();
     }
 
     /**

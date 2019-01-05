@@ -20,6 +20,11 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
+                <div class="box-header">
+                    <div class="pull-left">
+                        <a href="{{ route('backend.blog.create') }}" class="btn btn-success"> <i class="fa fa-plus"></i> Add New Post</a>
+                    </div>
+                </div>
             <!-- /.box-header -->
                 <div class="box-body ">
                     @if (! $posts->count())

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['view_count'];
+    protected $fillable = ['category_id', 'title', 'slug', 'image', 'excerpt', 'body', 'published_at', 'view_count'];
     protected $dates = ['published_at'];
 
     public function author()
@@ -70,6 +70,11 @@ class Post extends Model
         } else {
             return "<span class='label label-success'>Published</span>";
         }
+    }
+
+    public function setPublishedAtAttribute($value)
+    {
+        return $this->attributes['published_at'] = $value ? : NULL ;
     }
 
     public function getBodyHtmlAttribute($value)
