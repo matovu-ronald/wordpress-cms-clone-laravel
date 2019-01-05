@@ -1,6 +1,6 @@
 <header class="main-header">
         <!-- Logo -->
-        <a href="index.html" class="logo">
+        <a href="{{ route('home') }}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>M</b>B</span>
           <!-- logo for regular state and mobile devices -->
@@ -21,7 +21,7 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="{{ auth()->user()->gravatar() }}" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Alexander Pierce</span>
+                  <span class="hidden-xs">{{ auth()->user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
