@@ -226,6 +226,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'Alert' => 'Prologue\Alerts\Facades\Alert',
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
