@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class PostController extends BackendController
 {
+    protected $limit = 10;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +16,9 @@ class PostController extends BackendController
      */
     public function index()
     {
-        $posts = Post::with('category', 'author')->latest()->paginate(10);
-        return view('backend.blog.index', compact('posts'));
+        $posts = Post::with('category', 'author')->latest()->paginate($this->limit);
+        $postCount = Post::count();
+        return view('backend.blog.index', compact('posts', 'postCount'));
     }
 
     /**
