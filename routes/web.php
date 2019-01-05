@@ -10,18 +10,23 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Frontend Routes
 Route::get('/', 'PostController@index')->name('blog');
 Route::get('/blog/{post}', 'PostController@show')->name('blog.show');
 Route::get('/category/{category}', 'CategoryController@show')->name('category.show');
 Route::get('/author/{author}', 'PostController@author')->name('author');
 
-Route::get('test', 'WelcomeController@test');
-Route::get('reports', 'ReportsController@index');
-
+// Authentication Routes
 Auth::routes();
 
+// Home Controller Route
 Route::get('/home', 'Backend\HomeController@index')->name('home');
+
+// Backend Routes
+Route::namespace('Backend')->name('backend.')->prefix('backend')->group(function () {
+    Route::resource('/blog', 'PostController');
+});
+
 
 
 
