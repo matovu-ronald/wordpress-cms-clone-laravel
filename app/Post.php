@@ -66,7 +66,7 @@ class Post extends Model
         if (!$this->published_at) {
             return "<span class='label label-warning'>Draft</span>";
         } elseif ($this->published_at && $this->published_at->isFuture()) {
-            return "<span class='label label-info'>Schedule</span>";     
+            return "<span class='label label-info'>Scheduled</span>";     
         } else {
             return "<span class='label label-success'>Published</span>";
         }
