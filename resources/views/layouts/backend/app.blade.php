@@ -21,6 +21,8 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="/backend/../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
+  @yield('style')
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -57,32 +59,6 @@
 <script src="/backend/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/backend/js/app.min.js"></script>
-
-<script src="{{ asset('vendor/backpack/pnotify/pnotify.custom.min.js') }}"></script>
-
-{{-- Bootstrap Notifications using Prologue Alerts --}}
-<script type="text/javascript">
-  jQuery(document).ready(function($) {
-
-    PNotify.prototype.options.styling = "bootstrap3";
-    PNotify.prototype.options.styling = "fontawesome";
-
-    @foreach (Alert::getMessages() as $type => $messages)
-        @foreach ($messages as $message)
-
-            $(function(){
-              new PNotify({
-                // title: 'Regular Notice',
-                text: "{!! str_replace('"', "'", $message) !!}",
-                type: "{{ $type }}",
-                icon: false
-              });
-            });
-
-        @endforeach
-    @endforeach
-  });
-</script>
 
 @yield('script')
 
