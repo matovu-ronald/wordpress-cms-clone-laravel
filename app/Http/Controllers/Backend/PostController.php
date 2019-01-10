@@ -76,9 +76,10 @@ class PostController extends BackendController
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('backend.blog.edit', compact('post'));
     }
 
     /**
@@ -88,9 +89,14 @@ class PostController extends BackendController
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, $id)
     {
-        //
+        $post = findOrFail($id);
+        $data = $this->handleRequest($request);
+        $post->update($data);
+        Alert::success('Post Edited successfully')->flash();
+        return back();
+        
     }
 
     /**
