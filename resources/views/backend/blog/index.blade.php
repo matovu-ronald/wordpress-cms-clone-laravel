@@ -2,6 +2,15 @@
 
 @section('title', 'My Laravel Blog | All Posts')
 
+@section('style')
+    <style type="text/css">
+        .selectd-status {
+            font-weight: bold;
+            color: #0b6ba2;
+        }
+    </style>
+@endsection
+
 @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -25,11 +34,17 @@
                         <a href="{{ route('backend.blog.create') }}" class="btn btn-success"> <i class="fa fa-plus"></i> Add New Post</a>
                     </div>
                     <div class="pull-right" style="padding: 7px 0;">
-                        <a href="?status=all">All Posts</a> |
-                        <a href="?status=published">Published</a> |
-                        <a href="?status=scheduled">Scheduled</a> |
-                        <a href="?status=draft">Draft</a> |
-                        <a href="?status=trash">Trashed</a>
+                        @php($links = [])
+                        @foreach($statusList as $key => $value)
+                            @if($value)
+                                @php( $selected = Request::get('status') == $key ? 'selectd-status' : '' )
+                                @php(
+                                    $links[] = "<a class=\"{$selected}\" href=\"?status={$key}\">" . ucwords($key) . "({$value})" . "</a>"
+                                )
+                            @endif
+                        @endforeach
+                        {!! implode(' | ' , $links ) !!}
+
                     </div>
                 </div>
             <!-- /.box-header -->

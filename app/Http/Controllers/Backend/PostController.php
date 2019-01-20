@@ -58,7 +58,20 @@ class PostController extends BackendController
 
         }
 
-        return view('backend.blog.index', compact('posts', 'postCount', 'onlyTrashed'));
+        $statusList = $this->statusList();
+
+        return view('backend.blog.index', compact('posts', 'postCount', 'onlyTrashed', 'statusList'));
+    }
+
+    private function statusList()
+    {
+        return [
+            'all' => Post::count(),
+            'published' => Post::published()->count(),
+            'scheduled' => Post::scheduled()->count(),
+            'draft' => Post::draft()->count(),
+            'trash' => Post::onlyTrashed()->count(),
+        ];
     }
 
     /**
