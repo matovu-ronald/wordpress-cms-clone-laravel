@@ -103,8 +103,16 @@ class PostController extends BackendController
     public function update(PostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
+
+        //Get old image
+        $oldImage = $post->image;
+
         $data = $this->handleRequest($request);
         $post->update($data);
+
+        if ($oldImage !== $post->image) {
+            $this->removeImage($oldImage);
+        }
          
         Alert::success('Post Edited successfully')->flash();
 
@@ -136,6 +144,10 @@ class PostController extends BackendController
     {
         $post = Post::withTrashed()->findOrFail($id);
         $post->forceDelete();
+
+        // Remove image from the server
+        $this->removeImage($post->image);
+
         return redirect('/backend/blog/?status=trash')->with('message', 'Post has been permanently deleted');
     }
 
@@ -178,5 +190,19 @@ class PostController extends BackendController
         }
 
         return $data;
+    }
+
+    private function removeImage($image)
+    {
+        if ( ! empty($image) )
+        {
+            $imagePath     = $this->uploadPath . '/' . $image;
+            $ext           = substr(strrchr($image, '.'), 1);
+            $thumbnail     = str_replace(".{$ext}", "_thumb.{$ext}", $image);
+            $thumbnailPath = $this->uploadPath . '/' . $thumbnail;
+
+            if ( file_exists($imagePath) ) unlink($imagePath);
+            if ( file_exists($thumbnailPath) ) unlink($thumbnailPath);
+        }
     }
 }
