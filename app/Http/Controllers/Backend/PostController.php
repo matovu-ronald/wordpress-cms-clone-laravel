@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class PostController extends BackendController
 {
-    protected $limit = 10;
+    protected $limit = 4;
 
     protected $uploadPath;
 
