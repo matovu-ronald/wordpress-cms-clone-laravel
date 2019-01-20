@@ -28,6 +28,8 @@ class PostController extends BackendController
      */
     public function index(Request $request)
     {
+        $onlyTrashed = FALSE;
+
         if (($status = $request->get('status')) && $status == 'trash')
         {
             $posts = Post::onlyTrashed()->with('category', 'author')->latest()->paginate($this->limit);
@@ -35,10 +37,25 @@ class PostController extends BackendController
             $onlyTrashed = TRUE;
 
         }
+        elseif ($status == 'published')
+        {
+            $posts = Post::published()->with('category', 'author')->latest()->paginate($this->limit);
+            $postCount = Post::published()->count();
+        }
+        elseif ($status == 'scheduled')
+        {
+            $posts = Post::scheduled()->with('category', 'author')->latest()->paginate($this->limit);
+            $postCount = Post::scheduled()->count();
+        }
+        elseif ($status == 'draft')
+        {
+            $posts = Post::draft()->with('category', 'author')->latest()->paginate($this->limit);
+            $postCount = Post::draft()->count();
+        }
         else {
             $posts = Post::with('category', 'author')->latest()->paginate($this->limit);
             $postCount = Post::count();
-            $onlyTrashed = FALSE;
+
         }
 
         return view('backend.blog.index', compact('posts', 'postCount', 'onlyTrashed'));

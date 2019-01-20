@@ -26,6 +26,9 @@
                     </div>
                     <div class="pull-right" style="padding: 7px 0;">
                         <a href="?status=all">All Posts</a> |
+                        <a href="?status=published">Published</a> |
+                        <a href="?status=scheduled">Scheduled</a> |
+                        <a href="?status=draft">Draft</a> |
                         <a href="?status=trash">Trashed</a>
                     </div>
                 </div>

@@ -107,4 +107,16 @@ class Post extends Model
         return $query->where('published_at', '<=', Carbon::now())
             ->orderBy('published_at', 'desc'); 
     }
+
+    public function scopeScheduled($query)
+    {
+        return $query->where('published_at', '>', Carbon::now())
+            ->orderBy('published_at', 'desc');
+    }
+
+    public function scopeDraft($query)
+    {
+        return $query->whereNull('published_at')
+            ->orderBy('published_at', 'desc');
+    }
 }
