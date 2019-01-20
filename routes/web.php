@@ -25,6 +25,8 @@ Route::get('/home', 'Backend\HomeController@index')->name('home');
 // Backend Routes
 Route::namespace('Backend')->name('backend.')->prefix('backend')->group(function () {
     Route::resource('/blog', 'PostController');
+    Route::put('/blog/restore/{blog}', 'PostController@restore')->name('blog.restore');
+    Route::delete('/blog/force/destroy/{blog}', 'PostController@forceDestroy')->name('blog.force.destroy');
 });
 
 

@@ -227,6 +227,8 @@ return [
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'Alert' => 'Prologue\Alerts\Facades\Alert',
         'Image' => Intervention\Image\Facades\Image::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

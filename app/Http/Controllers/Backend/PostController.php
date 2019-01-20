@@ -26,11 +26,22 @@ class PostController extends BackendController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with('category', 'author')->latest()->paginate($this->limit);
-        $postCount = Post::count();
-        return view('backend.blog.index', compact('posts', 'postCount'));
+        if (($status = $request->get('status')) && $status == 'trash')
+        {
+            $posts = Post::onlyTrashed()->with('category', 'author')->latest()->paginate($this->limit);
+            $postCount = Post::onlyTrashed()->count();
+            $onlyTrashed = TRUE;
+
+        }
+        else {
+            $posts = Post::with('category', 'author')->latest()->paginate($this->limit);
+            $postCount = Post::count();
+            $onlyTrashed = FALSE;
+        }
+
+        return view('backend.blog.index', compact('posts', 'postCount', 'onlyTrashed'));
     }
 
     /**
@@ -38,9 +49,9 @@ class PostController extends BackendController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Post $post)
     {
-        return view('backend.blog.create');
+        return view('backend.blog.create', compact('post'));
     }
 
     /**
@@ -56,7 +67,7 @@ class PostController extends BackendController
 
         Alert::success('Post created successfully')->flash();
 
-        return back();
+        return redirect('/backend/blog')->with('message', 'Your post was created successfully!');
     }
 
     /**
@@ -91,11 +102,13 @@ class PostController extends BackendController
      */
     public function update(PostRequest $request, $id)
     {
-        $post = findOrFail($id);
+        $post = Post::findOrFail($id);
         $data = $this->handleRequest($request);
         $post->update($data);
+         
         Alert::success('Post Edited successfully')->flash();
-        return back();
+
+        return redirect('/backend/blog')->with('message', 'Your post was updated successfully!');
         
     }
 
@@ -105,9 +118,25 @@ class PostController extends BackendController
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id)->delete();
+
+        return redirect('/backend/blog')->with('trash-message', ['Post has been trashed successfully', $id]);
+    }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->restore();
+        return redirect('/backend/blog')->with('message', 'Your post has been moved from the trash');
+    }
+
+    public function forceDestroy($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->forceDelete();
+        return redirect('/backend/blog/?status=trash')->with('message', 'Post has been permanently deleted');
     }
 
     public function handleRequest($request)

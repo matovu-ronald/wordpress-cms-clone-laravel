@@ -24,48 +24,25 @@
                     <div class="pull-left">
                         <a href="{{ route('backend.blog.create') }}" class="btn btn-success"> <i class="fa fa-plus"></i> Add New Post</a>
                     </div>
+                    <div class="pull-right" style="padding: 7px 0;">
+                        <a href="?status=all">All Posts</a> |
+                        <a href="?status=trash">Trashed</a>
+                    </div>
                 </div>
             <!-- /.box-header -->
                 <div class="box-body ">
+                    @include('backend.blog.message')
                     @if (! $posts->count())
                         <div class="alert alert-danger text-center">
                             <strong>No records Found</strong>
                         </div>
                     @else 
-                        <div class="table-responsive">
-                            <table class="table table-hover table-bordered">
-                                <thead>
-                                        <tr>
-                                            <th>Actions</th>
-                                            <th>Title</th>
-                                            <th>Category</th>
-                                            <th>Author</th>
-                                            <th>Date</th>
-                                        </tr>
-                                </thead>
-                                <tbody>
-                                        @foreach ($posts as $post)
-                                            <tr>
-                                                <td>
-                                                    <a href="{{ route('backend.blog.edit', $post->id) }}" class="btn btn-xs btn-default">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                    <a href="{{ route('backend.blog.destroy', $post->id) }}" class="btn btn-xs btn-danger">
-                                                        <i class="fa fa-times"></i>
-                                                    </a>
-                                                </td>
-                                                <td> {{ $post->title }} </td>
-                                                <td>{{ $post->category->title }}</td>
-                                                <td>{{ $post->author->name }}</td>
-                                                <td>
-                                                <abbr title="{{ $post->dateFormatted(true) }}" > {{ $post->dateFormatted() }} </abbr>
-                                                {!! $post->publicationLabel() !!}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                </tbody>
-                                </table>
-                        </div>
+                        @if($onlyTrashed)
+                            @include('backend.blog.trash-table')
+                        @else
+                            @include('backend.blog.table')
+                        @endif
+
                     @endif
                     <div class="box-footer clearfix">
                         {{ $posts->links() }}
